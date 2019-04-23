@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/signIn","/signUp")
+                .antMatchers("/signIn","/signUp","/user/email/*/exists")
                 .anonymous()
                 .antMatchers("/")
                 .hasAnyAuthority(UserType.USER.name(),"ROLE_ANONYMOUS")
@@ -79,6 +79,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
+                .deleteCookies("RM")
+        .and()
+                .rememberMe()
+                .rememberMeParameter("remember-me")
+                .rememberMeCookieName("RM")
         .and()
                 .csrf()
                 .disable();

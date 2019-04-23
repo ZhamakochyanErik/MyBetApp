@@ -1,5 +1,6 @@
 package net.myBet.config.security;
 
+import net.myBet.controller.SignInController;
 import net.myBet.model.User;
 import net.myBet.model.enums.UserStatus;
 import net.myBet.model.enums.UserType;
@@ -24,14 +25,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest
+@WebMvcTest(controllers = SignInController.class)
 @ContextConfiguration(classes = SecurityTestConfig.class)
 public class SecurityConfigTest {
 
     @Autowired
     private MockMvc mvc;
 
-    @MockBean
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
